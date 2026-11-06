@@ -3,33 +3,80 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Conoce al artista y descubre su obra, trayectoria y proceso creativo.">
+    <meta name="description" content="Conoce a Yayoi Kusama y descubre su obra, trayectoria, exposiciones y proceso creativo.">
     <meta name="robots" content="index, follow">
-    <title>Nombre del artista | Portafolio</title>
+    <title>Yayoi Kusama | Portafolio</title>
     <link rel="stylesheet" href="styles.css">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "ProfilePage",
-        "name": "Nombre del artista | Portafolio",
-        "description": "Perfil del artista y presentación de su obra.",
+        "name": "Yayoi Kusama | Portafolio",
+        "description": "Perfil de la artista Yayoi Kusama y presentación de su obra y exposiciones.",
         "mainEntity": { "@id": "#artista" },
         "@graph": [
           {
             "@type": "Person",
             "@id": "#artista",
-            "name": "Nombre del artista",
-            "jobTitle": "Artista visual",
-            "description": "Breve biografía y descripción de la práctica artística.",
+            "sameAs": "https://es.wikipedia.org/wiki/Yayoi_Kusama",
+            "name": "Yayoi Kusama",
+            "jobTitle": "Artista contemporánea",
+            "description": "Artista japonesa pionera del arte pop y el minimalismo, famosa por sus instalaciones inmersivas y patrones de lunares.",
             "subjectOf": { "@id": "#obra" }
           },
           {
             "@type": "VisualArtwork",
             "@id": "#obra",
-            "name": "Título de la obra",
-            "description": "Descripción de la obra y de la idea que explora.",
-            "artform": "Técnica o disciplina artística",
+            "name": "Infinity Mirrored Room - The Souls of Millions of Light Years Away",
+            "description": "Instalación inmersiva de espejos y luces LED que crea una ilusión de espacio infinito.",
+            "artform": "Instalación",
             "creator": { "@id": "#artista" }
+          },
+          {
+            "@type": "Event",
+            "name": "Infinity Mirrors",
+            "startDate": "2017",
+            "endDate": "2019",
+            "location": {
+              "@type": "Place",
+              "name": "Hirshhorn Museum and Sculpture Garden",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Washington D.C.",
+                "addressCountry": "EE. UU."
+              }
+            },
+            "performer": { "@id": "#artista" }
+          },
+          {
+            "@type": "Event",
+            "name": "Retrospectiva Yayoi Kusama",
+            "startDate": "2012",
+            "location": {
+              "@type": "Place",
+              "name": "Tate Modern",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Londres",
+                "addressCountry": "Reino Unido"
+              }
+            },
+            "performer": { "@id": "#artista" }
+          },
+          {
+            "@type": "Event",
+            "name": "45.ª Bienal de Venecia",
+            "startDate": "1993",
+            "location": {
+              "@type": "Place",
+              "name": "Pabellón de Japón, Bienal de Venecia",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Venecia",
+                "addressCountry": "Italia"
+              }
+            },
+            "performer": { "@id": "#artista" }
           }
         ]
       }
@@ -40,13 +87,15 @@
 
     <header class="site-header">
       <div class="container header-content">
-        <a class="site-name" href="#inicio" aria-label="Nombre del artista, ir al inicio">
-          Nombre del artista
+        <a class="site-name" href="#inicio" aria-label="Yayoi Kusama, ir al inicio">
+          Yayoi Kusama
         </a>
         <nav aria-label="Navegación del portafolio">
           <ul class="nav-list">
             <li><a href="#obra">Obra</a></li>
             <li><a href="#artista">Artista</a></li>
+            <li><a href="#exposiciones">Exposiciones</a></li>
+            <li><a href="#trayectoria">Trayectoria</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </nav>
@@ -55,9 +104,9 @@
 
     <main id="contenido" class="container">
       <section id="inicio" class="intro" aria-labelledby="titulo-principal">
-        <p class="eyebrow">Portafolio · Artista visual</p>
-        <h1 id="titulo-principal">Nombre del artista</h1>
-        <p class="intro-copy">Una presentación breve de la práctica artística, sus temas y su mirada.</p>
+        <p class="eyebrow">Portafolio | Artista visual</p>
+        <h1 id="titulo-principal">Yayoi Kusama</h1>
+        <p class="intro-copy">Explora un universo infinito de lunares, luces y reflejos que desafían la percepción espacial.</p>
         <a class="text-link" href="#obra">Explorar la obra <span aria-hidden="true">↓</span></a>
       </section>
 
@@ -66,16 +115,16 @@
         <h2 id="titulo-seccion-obra">Una mirada a su trabajo</h2>
         <article class="artwork" aria-labelledby="titulo-obra">
           <div class="artwork-copy">
-            <h3 id="titulo-obra">Título de la obra</h3>
-            <p>Describe aquí la obra, los materiales y las ideas que la atraviesan.</p>
+            <h3 id="titulo-obra">Infinity Mirrored Room - The Souls of Millions of Light Years Away</h3>
+            <p>Una instalación a escala de una habitación revestida de espejos que contiene cientos de luces LED colgantes, generando una sensación de vastedad cósmica infinita.</p>
             <dl class="artwork-details">
               <div>
                 <dt>Técnica</dt>
-                <dd>Disciplina o materiales</dd>
+                <dd>Instalación multimedia con espejos y LED</dd>
               </div>
               <div>
                 <dt>Año</dt>
-                <dd>Año de creación</dd>
+                <dd>2013</dd>
               </div>
             </dl>
           </div>
@@ -83,21 +132,37 @@
       </section>
 
       <section id="artista" class="content-section" aria-labelledby="titulo-artista">
-        <p class="eyebrow">Sobre el artista</p>
+        <p class="eyebrow">Sobre la artista</p>
         <h2 id="titulo-artista">Una práctica en evolución</h2>
-        <p>Escribe una biografía breve: formación, trayectoria, intereses y contexto de trabajo.</p>
+        <p>Yayoi Kusama es una artista vanguardista japonesa cuyas obras abarcan la pintura, la escultura, el performance y las instalaciones ambientales. Su trabajo se caracteriza por la obsesión con los patrones repetitivos, especialmente los lunares y las redes infinitas.</p>
+      </section>
+
+      <section id="exposiciones" class="content-section" aria-labelledby="titulo-exposiciones">
+        <p class="eyebrow">Exposiciones</p>
+        <h2 id="titulo-exposiciones">Hitos expositivos</h2>
+        <p><strong>2017 - 2019:</strong> Gira internacional <em>Infinity Mirrors</em>, inaugurada en el Hirshhorn Museum and Sculpture Garden (Washington D.C., EE. UU.) y extendida por museos de Norteamérica.</p>
+        <p><strong>2012:</strong> Retrospectiva oficial en el museo Tate Modern (Londres, Reino Unido).</p>
+        <p><strong>1993:</strong> Representación individual de Japón en la 45.ª edición de la Bienal de Venecia (Venecia, Italia).</p>
+      </section>
+
+      <section id="trayectoria" class="content-section" aria-labelledby="titulo-trayectoria">
+        <p class="eyebrow">Trayectoria</p>
+        <h2 id="titulo-trayectoria">Cronología y recorrido vital</h2>
+        <p><strong>1929:</strong> Nace en la ciudad de Matsumoto, Prefectura de Nagano (Japón).</p>
+        <p><strong>1948 - 1949:</strong> Estudia pintura tradicional japonesa (Nihonga) en la Escuela Municipal de Artes y Oficios de Kioto (Japón).</p>
+        <p><strong>1958 - 1973:</strong> Reside y produce obra de vanguardia en Nueva York (EE. UU.) antes de retornar a Japón.</p>
       </section>
 
       <section id="contacto" class="content-section" aria-labelledby="titulo-contacto">
         <p class="eyebrow">Contacto</p>
         <h2 id="titulo-contacto">Conversemos</h2>
-        <address><a href="mailto:hola@example.com" aria-label="Enviar correo a Nombre del artista">hola@example.com</a></address>
+        <address><a href="mailto:info@yayoikusama.jp" aria-label="Enviar correo sobre Yayoi Kusama">info@yayoikusama.jp</a></address>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="container">
-        <p>© Nombre del artista</p>
+        <p>© Yayoi Kusama</p>
       </div>
     </footer>
   </body>

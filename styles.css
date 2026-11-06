@@ -1,239 +1,287 @@
+/* ==========================================
+   1. Variables y Configuración Base
+   ================================---------- */
 :root {
-  color-scheme: light;
-  --color-ink: #19313b;
-  --color-muted: #52656a;
-  --color-paper: #f7f8f4;
-  --color-surface: #ffffff;
-  --color-accent: #176b58;
-  --color-line: #d7dfd9;
-  --color-focus: #a64b00;
-  --content-width: 68rem;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --color-bg: #fdfdfd;
+  --color-text: #1a1a1a;
+  --color-text-muted: #666666;
+  --color-primary: #e60012; /* Rojo característico de la obra de Kusama */
+  --color-border: #e0e0e0;
+  --color-card-bg: #f7f7f7;
+  
+  --max-width: 800px;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Evita que el menú fijo tape los títulos al hacer clic */
 }
 
 body {
-  margin: 0;
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-family: system-ui, sans-serif;
-  font-size: 1rem;
-  line-height: 1.65;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
 }
 
-a {
-  color: var(--color-accent);
-  text-underline-offset: 0.2em;
-}
-
-a:hover {
-  text-decoration-thickness: 0.15em;
-}
-
-a:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 4px;
-}
-
-.container {
-  width: min(100% - 2rem, var(--content-width));
-  margin-inline: auto;
-}
-
+/* ==========================================
+   2. Accesibilidad (Skip Link)
+   ================================---------- */
 .skip-link {
   position: absolute;
-  z-index: 1;
-  top: 0.75rem;
-  left: 0.75rem;
-  padding: 0.65rem 1rem;
-  transform: translateY(-160%);
-  background: var(--color-ink);
-  color: var(--color-surface);
+  top: -40px;
+  left: 0;
+  background: var(--color-text);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 100;
+  text-decoration: none;
+  font-weight: 500;
+  transition: top 0.2s ease;
 }
 
 .skip-link:focus {
-  transform: translateY(0);
+  top: 0;
 }
 
+/* ==========================================
+   3. Contenedores y Estructura Común
+   ================================---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ==========================================
+   4. Cabecera y Navegación
+   ================================---------- */
 .site-header {
-  border-bottom: 1px solid var(--color-line);
-  background: var(--color-surface);
-}
-
-.header-content,
-.nav-list {
-  display: flex;
-  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: rgba(253, 253, 253, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 0;
+  z-index: 50;
 }
 
 .header-content {
-  min-height: 4.5rem;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .header-content {
+    flex-direction: row;
+  }
 }
 
 .site-name {
-  color: var(--color-ink);
-  font-size: 1.125rem;
   font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text);
   text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.site-name:hover {
+  color: var(--color-primary);
 }
 
 .nav-list {
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  margin: 0;
-  padding: 0;
   list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  justify-content: center;
 }
 
 .nav-list a {
-  color: var(--color-ink);
-  font-size: 0.95rem;
   text-decoration: none;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .nav-list a:hover {
-  color: var(--color-accent);
-  text-decoration: underline;
+  color: var(--color-primary);
+}
+
+/* ==========================================
+   5. Secciones (Ocupan mín. 100vh) y Tipografía
+   ================================---------- */
+.intro,
+.content-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido verticalmente en la pantalla */
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  border-top: 1px solid var(--color-border);
 }
 
 .intro {
-  max-width: 54rem;
-  padding-block: 6rem 5rem;
+  border-top: none;
+  margin-top: 0;
 }
 
 .eyebrow {
-  margin: 0 0 0.75rem;
-  color: var(--color-accent);
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.85rem;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
-h1,
-h2 {
-  line-height: 1.2;
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  color: var(--color-text);
 }
 
 h1 {
-  max-width: 14ch;
-  margin: 0;
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
 }
 
-.intro-copy {
-  max-width: 42rem;
-  margin-block: 1.25rem 1.5rem;
-  color: var(--color-muted);
+h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  margin-bottom: 1rem;
+}
+
+h3 {
   font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+p {
+  margin-bottom: 1.25rem;
+  color: #333333;
+}
+
+/* ==========================================
+   6. Sección Intro / Inicio
+   ================================---------- */
+.intro-copy {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin-bottom: 1.5rem;
 }
 
 .text-link {
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
 }
 
-.text-link span {
-  display: inline-block;
-  margin-left: 0.35rem;
+.text-link:hover {
+  color: var(--color-primary);
 }
 
-.content-section {
-  max-width: 52rem;
-  padding-block: 2.5rem 3.5rem;
-  border-top: 1px solid var(--color-line);
-  scroll-margin-top: 1rem;
-}
-
-.content-section h2 {
-  margin: 0 0 1.5rem;
-  font-size: 2rem;
-}
-
+/* ==========================================
+   7. Sección de Obra Destacada
+   ================================---------- */
 .artwork {
-  padding: clamp(1.25rem, 4vw, 2.5rem);
-  border: 1px solid var(--color-line);
-  border-left: 0.35rem solid var(--color-accent);
-  background: var(--color-surface);
+  background-color: var(--color-card-bg);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-top: 1.5rem;
+  border: 1px solid var(--color-border);
 }
 
-.artwork-copy {
-  max-width: 38rem;
-}
-
-.artwork h3 {
-  margin: 0;
-  font-size: 1.5rem;
+.artwork-copy p {
+  margin-bottom: 1.5rem;
 }
 
 .artwork-details {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 3rem;
-  margin: 1.5rem 0 0;
-}
-
-.artwork-details div {
-  min-width: 8rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
 }
 
 .artwork-details dt {
-  color: var(--color-muted);
   font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
 }
 
 .artwork-details dd {
-  margin: 0.2rem 0 0;
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--color-text);
 }
 
+/* ==========================================
+   8. Secciones de Exposiciones y Trayectoria
+   ================================---------- */
+#exposiciones p,
+#trayectoria p {
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--color-border);
+}
+
+#exposiciones p strong,
+#trayectoria p strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* ==========================================
+   9. Sección de Contacto
+   ================================---------- */
 address {
   font-style: normal;
 }
 
+address a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-text);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+address a:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ==========================================
+   10. Pie de Página (Footer)
+   ================================---------- */
 .site-footer {
-  margin-top: 1rem;
-  padding-block: 1.25rem;
-  background: var(--color-ink);
-  color: var(--color-surface);
-}
-
-.site-footer p {
-  margin: 0;
-}
-
-@media (max-width: 36rem) {
-  .header-content {
-    align-items: flex-start;
-    flex-direction: column;
-    padding-block: 1rem;
-  }
-
-  .nav-list {
-    gap: 0.5rem 1rem;
-  }
-
-  .intro {
-    padding-block: 4rem 3.5rem;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  .content-section h2 {
-    font-size: 1.65rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  padding: 3rem 0;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
 }
