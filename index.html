@@ -1,169 +1,551 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Conoce a Yayoi Kusama y descubre su obra, trayectoria, exposiciones y proceso creativo.">
-    <meta name="robots" content="index, follow">
-    <title>Yayoi Kusama | Portafolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Dashboard financiero y analítico de demostración: campañas, ingresos, conversión y postventa. Perfil editorial independiente de Emma Chamberlain."
+    />
+    <meta name="robots" content="index, follow" />
+    <title>Emma Chamberlain | Campaign Intelligence</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"
+    ></script>
+    <script
+      defer
+      src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"
+    ></script>
+    <script defer src="dashboard.js"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "ProfilePage",
-        "name": "Yayoi Kusama | Portafolio",
-        "description": "Perfil de la artista Yayoi Kusama y presentación de su obra y exposiciones.",
-        "mainEntity": { "@id": "#artista" },
-        "@graph": [
-          {
-            "@type": "Person",
-            "@id": "#artista",
-            "sameAs": "https://es.wikipedia.org/wiki/Yayoi_Kusama",
-            "name": "Yayoi Kusama",
-            "jobTitle": "Artista contemporánea",
-            "description": "Artista japonesa pionera del arte pop y el minimalismo, famosa por sus instalaciones inmersivas y patrones de lunares.",
-            "subjectOf": { "@id": "#obra" }
-          },
-          {
-            "@type": "VisualArtwork",
-            "@id": "#obra",
-            "name": "Infinity Mirrored Room - The Souls of Millions of Light Years Away",
-            "description": "Instalación inmersiva de espejos y luces LED que crea una ilusión de espacio infinito.",
-            "artform": "Instalación",
-            "creator": { "@id": "#artista" }
-          },
-          {
-            "@type": "Event",
-            "name": "Infinity Mirrors",
-            "startDate": "2017",
-            "endDate": "2019",
-            "location": {
-              "@type": "Place",
-              "name": "Hirshhorn Museum and Sculpture Garden",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Washington D.C.",
-                "addressCountry": "EE. UU."
-              }
-            },
-            "performer": { "@id": "#artista" }
-          },
-          {
-            "@type": "Event",
-            "name": "Retrospectiva Yayoi Kusama",
-            "startDate": "2012",
-            "location": {
-              "@type": "Place",
-              "name": "Tate Modern",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Londres",
-                "addressCountry": "Reino Unido"
-              }
-            },
-            "performer": { "@id": "#artista" }
-          },
-          {
-            "@type": "Event",
-            "name": "45.ª Bienal de Venecia",
-            "startDate": "1993",
-            "location": {
-              "@type": "Place",
-              "name": "Pabellón de Japón, Bienal de Venecia",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Venecia",
-                "addressCountry": "Italia"
-              }
-            },
-            "performer": { "@id": "#artista" }
+        "name": "Emma Chamberlain | Perfil y colaboraciones",
+        "description": "Perfil editorial independiente de la creadora y emprendedora Emma Chamberlain.",
+        "mainEntity": {
+          "@type": "Person",
+          "@id": "#creadora",
+          "name": "Emma Chamberlain",
+          "jobTitle": "Creadora de contenido y emprendedora",
+          "sameAs": [
+            "https://www.youtube.com/@emmachamberlain",
+            "https://www.instagram.com/emmachamberlain/"
+          ],
+          "subjectOf": {
+            "@type": "PodcastSeries",
+            "name": "Anything Goes with Emma Chamberlain",
+            "creator": { "@id": "#creadora" }
           }
-        ]
+        }
       }
     </script>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-
-    <header class="site-header">
-      <div class="container header-content">
-        <a class="site-name" href="#inicio" aria-label="Yayoi Kusama, ir al inicio">
-          Yayoi Kusama
-        </a>
-        <nav aria-label="Navegación del portafolio">
-          <ul class="nav-list">
-            <li><a href="#obra">Obra</a></li>
-            <li><a href="#artista">Artista</a></li>
-            <li><a href="#exposiciones">Exposiciones</a></li>
-            <li><a href="#trayectoria">Trayectoria</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-          </ul>
-        </nav>
-      </div>
+    <header class="app-header">
+      <a href="#contenido" class="app-brand"
+        ><span class="brand-mark">ec.</span
+        ><span>Campaign<br /><strong>Intelligence</strong></span></a
+      >
+      <nav aria-label="Navegación del dashboard">
+        <a class="active" href="#resultados">Resumen</a
+        ><a href="#drivers">Análisis</a><a href="#operaciones">Operaciones</a>
+      </nav>
+      <button
+        class="profile-button"
+        id="open-profile"
+        title="Perfil y fuentes de Emma Chamberlain"
+      >
+        <img
+          src="https://yt3.googleusercontent.com/zDSI5VOhKgSHZMOihPFJGh4NmgHu1fI7bVYp8lhTuhnwhDBECt-Hgs1nm69dCn23aXZZAtCQ7g=s88-c-k-c0x00ffffff-no-rj"
+          alt=""
+          width="32"
+          height="32"
+        />
+        <span>Emma Chamberlain</span
+        ><i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
     </header>
-
-    <main id="contenido" class="container">
-      <section id="inicio" class="intro" aria-labelledby="titulo-principal">
-        <p class="eyebrow">Portafolio | Artista visual</p>
-        <h1 id="titulo-principal">Yayoi Kusama</h1>
-        <p class="intro-copy">Explora un universo infinito de lunares, luces y reflejos que desafían la percepción espacial.</p>
-        <a class="text-link" href="#obra">Explorar la obra <span aria-hidden="true">↓</span></a>
-      </section>
-
-      <section id="obra" class="content-section" aria-labelledby="titulo-seccion-obra">
-        <p class="eyebrow">Obra destacada</p>
-        <h2 id="titulo-seccion-obra">Una mirada a su trabajo</h2>
-        <article class="artwork" aria-labelledby="titulo-obra">
-          <div class="artwork-copy">
-            <h3 id="titulo-obra">Infinity Mirrored Room - The Souls of Millions of Light Years Away</h3>
-            <p>Una instalación a escala de una habitación revestida de espejos que contiene cientos de luces LED colgantes, generando una sensación de vastedad cósmica infinita.</p>
-            <dl class="artwork-details">
-              <div>
-                <dt>Técnica</dt>
-                <dd>Instalación multimedia con espejos y LED</dd>
-              </div>
-              <div>
-                <dt>Año</dt>
-                <dd>2013</dd>
-              </div>
-            </dl>
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">EMMA CHAMBERLAIN / CAMPAIGN INTELLIGENCE</p>
+        <h1>El rendimiento, en perspectiva.</h1>
+        <p class="subtitle">Campañas, comunidad y resultados financieros.</p>
+      </div>
+      <div class="heading-actions">
+        <span class="demo-badge"><span></span>Datos de demostración</span
+        ><button class="button" id="export-all">
+          <i data-lucide="download" aria-hidden="true"></i>Exportar informe
+        </button>
+      </div>
+    </div>
+    <form class="filter-bar" id="filters" aria-label="Filtros globales">
+      <label
+        ><i data-lucide="calendar-days" aria-hidden="true"></i
+        ><span
+          >Período<select id="period">
+            <option value="30">Últimos 30 días</option>
+            <option value="7">Últimos 7 días</option>
+            <option value="60">Últimos 60 días</option>
+          </select></span
+        ></label
+      >
+      <label
+        ><span
+          >Plataforma<select id="platform">
+            <option value="">Todas las plataformas</option>
+          </select></span
+        ></label
+      >
+      <label
+        ><span
+          >Producto<select id="product">
+            <option value="">Todos los productos</option>
+          </select></span
+        ></label
+      >
+      <label
+        ><span
+          >Campaña<select id="campaign">
+            <option value="">Todas las campañas</option>
+          </select></span
+        ></label
+      >
+      <button
+        class="icon-button"
+        type="reset"
+        aria-label="Restablecer filtros"
+        title="Restablecer filtros"
+      >
+        <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+      </button>
+      <span class="date-range" id="date-range"></span>
+    </form>
+    <main id="contenido" class="dashboard">
+      <section
+        id="resultados"
+        class="dashboard-block"
+        data-block="1"
+        aria-labelledby="results-title"
+      >
+        <div class="block-heading">
+          <div>
+            <p class="eyebrow">PANORAMA FINANCIERO</p>
+            <h2 id="results-title">Indicadores principales</h2>
           </div>
-        </article>
+          <span class="comparison-label" id="comparison-label"></span>
+        </div>
+        <div id="kpi-grid" class="kpi-grid"></div>
+        <p class="empty-state" id="global-empty" hidden>
+          No hay datos para esta combinación de filtros.
+        </p>
       </section>
-
-      <section id="artista" class="content-section" aria-labelledby="titulo-artista">
-        <p class="eyebrow">Sobre la artista</p>
-        <h2 id="titulo-artista">Una práctica en evolución</h2>
-        <p>Yayoi Kusama es una artista vanguardista japonesa cuyas obras abarcan la pintura, la escultura, el performance y las instalaciones ambientales. Su trabajo se caracteriza por la obsesión con los patrones repetitivos, especialmente los lunares y las redes infinitas.</p>
+      <section
+        id="drivers"
+        class="dashboard-block"
+        data-block="2"
+        aria-labelledby="drivers-title"
+      >
+        <div class="block-heading">
+          <div>
+            <p class="eyebrow">QUÉ MUEVE EL RESULTADO</p>
+            <h2 id="drivers-title">Drivers de rendimiento</h2>
+          </div>
+          <span class="muted">Atribución de demostración · EUR</span>
+        </div>
+        <div class="drivers-grid">
+          <article class="analysis-panel">
+            <div class="panel-heading">
+              <h3>Conversión por etapas</h3>
+              <span class="small-badge">Funnel de ventas</span>
+            </div>
+            <div id="funnel" class="funnel"></div>
+          </article>
+          <article class="analysis-panel">
+            <div class="panel-heading">
+              <h3>Rendimiento por plataforma</h3>
+              <select
+                id="platform-metric"
+                aria-label="Métrica del gráfico de plataformas"
+              >
+                <option value="revenue">Ingresos</option>
+                <option value="orders">Conversiones</option>
+                <option value="engagement">Engagement</option>
+              </select>
+            </div>
+            <div class="chart-container">
+              <canvas
+                id="platform-chart"
+                role="img"
+                aria-label="Comparación de plataformas"
+              ></canvas>
+            </div>
+            <div class="chart-summary" id="platform-summary"></div>
+          </article>
+          <article class="analysis-panel">
+            <div class="panel-heading">
+              <h3>Métricas de calidad</h3>
+              <i data-lucide="badge-check" aria-hidden="true"></i>
+            </div>
+            <div id="quality" class="quality-list"></div>
+            <div class="chart-container small-chart">
+              <canvas
+                id="quality-chart"
+                role="img"
+                aria-label="Evolución de leads cualificados"
+              ></canvas>
+            </div>
+            <div class="chart-summary" id="quality-summary"></div>
+          </article>
+          <article class="analysis-panel">
+            <div class="panel-heading">
+              <h3>Rendimiento por producto</h3>
+              <span class="muted">Comisiones + conversión</span>
+            </div>
+            <div class="chart-container">
+              <canvas
+                id="product-chart"
+                role="img"
+                aria-label="Comisiones y conversión por producto"
+              ></canvas>
+            </div>
+            <div class="chart-summary" id="product-summary"></div>
+          </article>
+          <article class="analysis-panel">
+            <div class="panel-heading">
+              <h3>Actividad por plataforma</h3>
+              <span class="muted">Publicaciones</span>
+            </div>
+            <div class="chart-container">
+              <canvas
+                id="activity-chart"
+                role="img"
+                aria-label="Posts, stories, reels y vídeos por plataforma"
+              ></canvas>
+            </div>
+            <div class="chart-summary" id="activity-summary"></div>
+          </article>
+          <article class="analysis-panel">
+            <div class="panel-heading">
+              <h3>Engagement detallado</h3>
+              <span class="muted">Interacciones</span>
+            </div>
+            <div class="chart-container">
+              <canvas
+                id="engagement-chart"
+                role="img"
+                aria-label="Me gusta, comentarios, compartidos y guardados por plataforma"
+              ></canvas>
+            </div>
+            <div class="chart-summary" id="engagement-summary"></div>
+          </article>
+        </div>
       </section>
-
-      <section id="exposiciones" class="content-section" aria-labelledby="titulo-exposiciones">
-        <p class="eyebrow">Exposiciones</p>
-        <h2 id="titulo-exposiciones">Hitos expositivos</h2>
-        <p><strong>2017 - 2019:</strong> Gira internacional <em>Infinity Mirrors</em>, inaugurada en el Hirshhorn Museum and Sculpture Garden (Washington D.C., EE. UU.) y extendida por museos de Norteamérica.</p>
-        <p><strong>2012:</strong> Retrospectiva oficial en el museo Tate Modern (Londres, Reino Unido).</p>
-        <p><strong>1993:</strong> Representación individual de Japón en la 45.ª edición de la Bienal de Venecia (Venecia, Italia).</p>
-      </section>
-
-      <section id="trayectoria" class="content-section" aria-labelledby="titulo-trayectoria">
-        <p class="eyebrow">Trayectoria</p>
-        <h2 id="titulo-trayectoria">Cronología y recorrido vital</h2>
-        <p><strong>1929:</strong> Nace en la ciudad de Matsumoto, Prefectura de Nagano (Japón).</p>
-        <p><strong>1948 - 1949:</strong> Estudia pintura tradicional japonesa (Nihonga) en la Escuela Municipal de Artes y Oficios de Kioto (Japón).</p>
-        <p><strong>1958 - 1973:</strong> Reside y produce obra de vanguardia en Nueva York (EE. UU.) antes de retornar a Japón.</p>
-      </section>
-
-      <section id="contacto" class="content-section" aria-labelledby="titulo-contacto">
-        <p class="eyebrow">Contacto</p>
-        <h2 id="titulo-contacto">Conversemos</h2>
-        <address><a href="mailto:info@yayoikusama.jp" aria-label="Enviar correo sobre Yayoi Kusama">info@yayoikusama.jp</a></address>
+      <section
+        id="operaciones"
+        class="dashboard-block"
+        data-block="3"
+        aria-labelledby="operations-title"
+      >
+        <div class="block-heading">
+          <div>
+            <p class="eyebrow">DEL DATO A LA DECISIÓN</p>
+            <h2 id="operations-title">Detalles operacionales y alertas</h2>
+          </div>
+          <span class="alert-count" id="alert-count"></span>
+        </div>
+        <div class="operations-grid">
+          <div class="operations-main">
+            <div class="table-toolbar">
+              <div
+                class="tabs"
+                role="tablist"
+                aria-label="Tablas operacionales"
+              >
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="table-panel"
+                  id="tab-products"
+                  data-table="products"
+                >
+                  Productos</button
+                ><button
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="table-panel"
+                  id="tab-platforms"
+                  data-table="platforms"
+                  tabindex="-1"
+                >
+                  Plataformas</button
+                ><button
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="table-panel"
+                  id="tab-campaigns"
+                  data-table="campaigns"
+                  tabindex="-1"
+                >
+                  Campañas
+                </button>
+              </div>
+              <button
+                class="icon-button"
+                id="export-table"
+                title="Exportar tabla CSV"
+                aria-label="Exportar tabla CSV"
+              >
+                <i data-lucide="download" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="table-filters">
+              <label class="search-field"
+                ><i data-lucide="search" aria-hidden="true"></i
+                ><input
+                  id="table-search"
+                  type="search"
+                  placeholder="Buscar en la tabla"
+                  aria-label="Buscar en la tabla" /></label
+              ><label class="roi-filter"
+                ><input id="positive-roi" type="checkbox" />Solo ROI
+                positivo</label
+              ><label class="muted"
+                >Filas<select id="page-size" aria-label="Filas por página">
+                  <option value="2">2</option>
+                  <option value="5" selected>5</option>
+                  <option value="10">10</option>
+                </select></label
+              >
+            </div>
+            <div
+              id="table-panel"
+              role="tabpanel"
+              aria-labelledby="tab-products"
+              class="table-scroll"
+              tabindex="0"
+            >
+              <table id="data-table">
+                <caption id="table-caption" class="sr-only">
+                  Tabla de productos
+                </caption>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="table-pagination">
+              <span id="table-count"></span>
+              <div>
+                <button
+                  class="icon-button"
+                  id="previous-page"
+                  aria-label="Página anterior"
+                  title="Página anterior"
+                >
+                  <i data-lucide="chevron-left" aria-hidden="true"></i></button
+                ><span id="page-label"></span
+                ><button
+                  class="icon-button"
+                  id="next-page"
+                  aria-label="Página siguiente"
+                  title="Página siguiente"
+                >
+                  <i data-lucide="chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="rankings">
+              <div class="panel-heading">
+                <h3>Rankings y oportunidades</h3>
+                <select id="ranking-metric" aria-label="Ordenar rankings por">
+                  <option value="roi">Ordenar por ROI</option>
+                  <option value="orders">Ordenar por conversiones</option>
+                  <option value="revenue">Ordenar por ingresos</option>
+                </select>
+              </div>
+              <div
+                class="ranking-tabs"
+                role="group"
+                aria-label="Seleccionar ranking"
+              >
+                <button
+                  class="selected"
+                  data-ranking="products"
+                  aria-pressed="true"
+                >
+                  Top Productos</button
+                ><button data-ranking="platforms" aria-pressed="false">
+                  Top Plataformas</button
+                ><button data-ranking="campaigns" aria-pressed="false">
+                  Top Campañas</button
+                ><button data-ranking="opportunities" aria-pressed="false">
+                  Oportunidades de Mejora
+                </button>
+              </div>
+              <ol id="ranking-list"></ol>
+            </div>
+          </div>
+          <aside class="alerts-area" aria-labelledby="alerts-title">
+            <div class="panel-heading">
+              <h3 id="alerts-title">Alertas automatizadas</h3>
+              <i data-lucide="bell-ring" aria-hidden="true"></i>
+            </div>
+            <label class="alert-toggle"
+              ><input type="checkbox" id="show-reviewed" />Mostrar
+              revisadas</label
+            >
+            <div id="alerts-list"></div>
+            <details class="alert-rules">
+              <summary>Reglas de detección</summary>
+              <p>
+                Conversión: variación relativa ≥ 30% de los últimos 7 días
+                frente al resto del período; mínimo 100 leads en cada ventana.
+                Rendimiento: margen inferior al 20%. Con 7 días seleccionados no
+                hay ventana anterior para detectar picos o caídas.
+              </p>
+            </details>
+          </aside>
+        </div>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>© Yayoi Kusama</p>
-      </div>
+    <footer class="dashboard-footer">
+      <p>
+        Perfil editorial independiente · Datos sintéticos, no resultados reales
+        de Emma Chamberlain ni de sus marcas.
+      </p>
+      <button class="text-button" id="open-methodology">
+        Metodología y fuentes<i
+          data-lucide="arrow-up-right"
+          aria-hidden="true"
+        ></i>
+      </button>
     </footer>
+    <dialog id="profile-dialog" aria-labelledby="profile-title">
+      <div class="dialog-heading">
+        <p class="eyebrow">PERFIL EDITORIAL</p>
+        <button
+          class="icon-button close-dialog"
+          aria-label="Cerrar perfil"
+          title="Cerrar"
+        >
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <h2 id="profile-title">Emma Chamberlain</h2>
+      <p>
+        Creadora de contenido y fundadora de Chamberlain Coffee. Su canal
+        oficial identifica el pódcast Anything Goes.
+      </p>
+      <p>
+        NYLON documenta su incorporación a Lancôme el 12 de enero de 2023 y la
+        serie How Do You Say Beauty in French? Esto no acredita contratos
+        actuales ni disponibilidad para patrocinios.
+      </p>
+      <div class="source-links">
+        <a href="https://www.youtube.com/@emmachamberlain">YouTube oficial</a
+        ><a href="https://chamberlaincoffee.com/">Chamberlain Coffee</a
+        ><a
+          href="https://www.nylon.com/beauty/emma-chamberlain-is-the-new-face-of-lancome"
+          >Fuente: NYLON, 2023</a
+        >
+      </div>
+      <p class="muted">
+        Campañas y catálogo del dashboard son ficticios. No hay afiliación,
+        contratación ni patrocinio confirmado.
+      </p>
+    </dialog>
+    <dialog id="methodology-dialog" aria-labelledby="methodology-title">
+      <div class="dialog-heading">
+        <p class="eyebrow">DEFINICIONES</p>
+        <button
+          class="icon-button close-dialog"
+          aria-label="Cerrar metodología"
+          title="Cerrar"
+        >
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <h2 id="methodology-title">Metodología y fuentes</h2>
+      <p>
+        Datos sintéticos deterministas hasta el 8 de noviembre de 2026.
+        Comparación con el período anterior de igual duración. Moneda: EUR. No
+        hay conexión a plataformas ni datos financieros reales.
+      </p>
+      <dl class="definitions">
+        <dt>Ingresos y margen</dt>
+        <dd>
+          Ingresos = ventas propias + comisiones de afiliación, sin sumar el
+          valor bruto de ventas afiliadas. Beneficio = ingresos − inversión
+          publicitaria − costes de entrega. Margen = beneficio / ingresos. ROI =
+          beneficio / inversión.
+        </dd>
+        <dt>Conversión y engagement</dt>
+        <dd>
+          Conversión general = compras / leads MQL. CTR = clics / impresiones.
+          Conversión por impacto = compras / impresiones. Engagement =
+          interacciones / impresiones. Compleción = compras / procesos de
+          checkout iniciados.
+        </dd>
+        <dt>Retención y MRR</dt>
+        <dd>
+          Churn = bajas / cohorte de suscripciones renovables; retención = 1 −
+          churn. MRR = suscripciones activas al cierre × precio mensual. Precio
+          medio = ventas propias / compras propias.
+        </dd>
+        <dt>Calidad y satisfacción</dt>
+        <dd>
+          SQL/MQL = leads cualificados / leads. Attendance = asistentes /
+          inscritos al evento. Pass rate = aprobados / asistentes. NPS = (%
+          promotores − % detractores); CSAT = respuestas satisfechas /
+          respuestas totales.
+        </dd>
+        <dt>Usuarios y alcance</dt>
+        <dd>
+          Usuarios activos deduplicados por identificador sintético. Alcance por
+          plataforma = usuarios distintos; las audiencias de plataformas no
+          deben sumarse sin deduplicar. CPA = inversión / compras; CPL =
+          inversión / leads. Tiempo medio ponderado por compras.
+        </dd>
+        <dt>Comparativas</dt>
+        <dd>
+          Tasas: diferencia en puntos porcentuales. NPS: diferencia en puntos.
+          Resto: cambio relativo. Sin base anterior se muestra «Sin base». Las
+          mejores plataformas se calculan entre las incluidas en los filtros;
+          los empates comparten indicador.
+        </dd>
+      </dl>
+      <div class="source-links">
+        <a
+          href="https://www.nylon.com/beauty/emma-chamberlain-is-the-new-face-of-lancome"
+          >Referencia biográfica: NYLON</a
+        ><a href="https://chamberlaincoffee.com/"
+          >Proyecto real: Chamberlain Coffee</a
+        >
+      </div>
+    </dialog>
+    <div
+      id="notification"
+      class="notification"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+    <noscript
+      ><p class="no-script">
+        Activa JavaScript para consultar los datos y filtros del dashboard.
+      </p></noscript
+    >
   </body>
 </html>
